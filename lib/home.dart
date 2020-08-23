@@ -12,11 +12,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _textField({String labelText, onChanged}) {
+    _textField({String labelText, onChanged, String Function() errorText}) {
       return TextField(
         onChanged: onChanged,
-        decoration:
-            InputDecoration(border: OutlineInputBorder(), labelText: labelText),
+        decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: labelText,
+            errorText: errorText == null ? null : errorText()),
       );
     }
 
@@ -29,10 +31,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            // Wrapping in the Observer will automatically re-render on changes to counter.value
+            Observer(builder: (_) {
+              return _textField(
+                  labelText: 'Name', onChanged: controller.client.changeName);
+            }),
+            _textField(labelText: 'e-mail'),
+            _textField(labelText: 'CPF'),
           ],
         ),
       ),
