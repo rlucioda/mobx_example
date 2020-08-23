@@ -1,4 +1,6 @@
 import 'package:mobx/mobx.dart';
+
+import 'models/client.dart';
 // *Include generated file
 part 'controller.g.dart';
 
@@ -6,13 +8,5 @@ part 'controller.g.dart';
 class Controller = ControllerBase with _$Controller;
 
 abstract class ControllerBase with Store {
-  // *inicia o Observable
-  @observable
-  int counter = 0;
-
-//Ação que será executada
-  @action
-  increment() {
-    counter++;
-  }
+  var client = Client();
 }
